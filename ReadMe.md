@@ -1,7 +1,7 @@
-**SUMMARY**
+##SUMMARY##
 The following provides instructions on how to install VMware's open source Harbor Container Registry into a Kubernetes cluster along with an official CA Signed certificate for the Harbor deployment, issued by Let's Encrypt via automation through JetStack's Cert Manager.
 
-**NOTES**
+##NOTES##
 Step 4 is only required in newly created TKC K8s clusters
 Step 7 installs an nginx ingress controller into the K8s cluster.  This will be used to expose the Harbor registry externally
 Step 8 installs Cert Manager into the K8s cluster. Cert Manager is a certificate controller that automates the certificate issuance and assignment process in a K8s cluster.  It requires certificate "issuers", in this case we're using LetsEncrypt as the CA Authority which will issue a 90 day cert.
@@ -9,7 +9,7 @@ Step 9 Configures the "issuer" (LetsEncrypt -- sometimes it's referred to as ACM
 Step 10 and beyond install Harbor into the cluster.
 
 
-**INSTRUCTIONS**
+##INSTRUCTIONS##
 w/tkg use Metallb for v7wk8s skip to step 4
   
 1.   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
