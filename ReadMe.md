@@ -20,7 +20,7 @@ Start w/ TKG-S
 
 4.   Run the following command in a TKGS cluster to create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP:   
 `kubectl apply -f https://raw.githubusercontent.com/trevorputbrese/tkc/master/tkc-priveledged-cluster-role.yaml`    <br />
-<br />
+
 5.   helm repo add stable https://charts.helm.sh/stable  
 6.   helm repo add bitnami https://charts.bitnami.com/bitnami  
 7.   helm install nginx-ingress stable/nginx-ingress --set controller.config.proxy-body-size=1024m  
