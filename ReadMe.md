@@ -18,27 +18,30 @@ w/tkg use Metallb for v7wk8s skip to step 4
   
 Start w/ TKG-S
 
-4.   Create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary is a newly created TKGs K8s cluster):
+4.   Create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary is a newly created TKGs K8s cluster):  
 `kubectl apply -f https://raw.githubusercontent.com/trevorputbrese/tkc/master/tkc-priveledged-cluster-role.yaml`    <br />
 
-5.   Add the stable Helm repo (nginx chart is here):
+5.   Add the stable Helm repo (nginx chart is here):  
 `helm repo add stable https://charts.helm.sh/stable`  
 
-6.   Add the Bitnami repo to Helm:
+6.   Add the Bitnami repo to Helm:  
 `repo add bitnami https://charts.bitnami.com/bitnami`
 
-7.   Install nginx ingress into the cluster using Helm:
+7.   Install nginx ingress into the cluster using Helm:  
 `helm install nginx-ingress stable/nginx-ingress --set controller.config.proxy-body-size=1024m`
 
-8.   Install Cert Manager into the cluster:
+8.   Install Cert Manager into the cluster:  
 `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.4/cert-manager.yaml`
 
-9.   Apply the acme.yml (it will need to be edited with your credentials) to create the secret, certificate, and issuer resource in yoru cluster:
+9.   Apply the acme.yml (it will need to be edited with your credentials) to create the secret, certificate, and issuer resource in yoru cluster:  
 `kubectl apply -f acme.yml`
-10.  Make sure you have a default storage class in your cluster.  If you don't:
+
+10.  Make sure you have a default storage class in your cluster.  If you don't:  
 `kubectl annotate sc "YOUR-STORAGE-CLASS" storageclass.kubernetes.io/is-default-class=true`
 
-11.  modify harbor-values.yml to set global.storageClass
-12.  Install Harbor using Helm:
+11.  modify harbor-values.yml to set global.storageClass  
+
+12.  Install Harbor using Helm:  
 `helm install harbor bitnami/harbor --version 7.1.0 -f harbor-values.yml`
+
 13.  navigate to harbor.YOUR.DOMAIN in browser
