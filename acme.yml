@@ -4,7 +4,7 @@ metadata:
   name: prod-route53-credentials-secret
 type: Opaque
 stringData:
-  api-token: [API-TOKEN]
+  api-token: [SECRET-ACCESS-KEY]
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
