@@ -1,0 +1,18 @@
+global:
+  storageClass:  "standard"
+persistence:
+  persistentVolumeClaim:
+    database:
+      size: 1024Gi
+tls:
+  secretName: tls-secret
+externalURL: https://harbor.trvcloud.com
+harborAdminPassword: admin
+ingress:
+  hosts:
+    core: harbor.trvcloud.com
+    notary: notary.trvcloud.com
+  enabled: true
+service:
+  tls:
+    commonName: harbor.trvcloud.com
