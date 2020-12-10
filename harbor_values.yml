@@ -17,4 +17,3 @@ service:
   type: Ingress
   tls:
     existingSecret: tls-secret
-    commonName: harbor.ashburncloud.net
