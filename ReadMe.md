@@ -5,8 +5,8 @@ The following provides instructions on how to install VMware's open source Harbo
 -These instructions and the accompanying yaml files assume your domain is hosted at AWS/Route53.  If you are using another DNS provider you will need to edit the acme.yaml file appropriately.  You will find instructions for other providers here:  https://cert-manager.io/docs/configuration/acme/dns01/  
 -Step 3 installs an nginx ingress controller into the K8s cluster.  This will be used to expose the Harbor registry externally  
 -Step 4 installs Cert Manager into the K8s cluster. Cert Manager is a certificate controller that automates the certificate issuance and assignment process in a K8s cluster.  It requires certificate "issuers", in this case we're using LetsEncrypt as the CA Authority which will issue a 90 day cert.  Note, I'm using an "Issuer" as opposed to a "ClusterIssuer" so I've deployed everything in the same namespace (the default ns).  
--Step 5 configures the "issuer" (again, that's LetsEncrypt).  In the Cert Manager documentation the issuer is often referred to as ACME, but technically that is the protocol that LetsEncrypt uses to automate certificate processes.  LetsEncrypt root certs are installed in just about all OS's "trusted cert" stores, so it's a "real CA" to your computer.  There's a process, called a "challenge" by which your ownership of the domain name must be validated.  Let's Encrypt reaches out to an public facing ACME server to complete the challenge, of which there are two types:  HTTP01 and DNS01.  The instructions below use DNS01 which is easier if you don't have a web server with a public IP (see acme.yaml for DNS01 challenge details).  In short, LE will use some AWS creds I've added to my cluster (as a secret in "acme.yaml") to make an API call to AWS cloud to create a DNS TXT record that ACME server will look for to validate you own the domain.  
--Step 10 and beyond install Harbor into the cluster.
+-Step 5 configures the "issuer" (again, that's LetsEncrypt).  In the Cert Manager documentation the issuer is often referred to as ACME, but technically that is the protocol that LetsEncrypt uses to automate certificate processes.  LetsEncrypt root certs are installed in just about all OS's "trusted cert" stores, so it's a "real CA" to your computer.  There's a process, called a "challenge" by which your ownership of the domain name must be validated.  Let's Encrypt reaches out to an public facing ACME server to complete the challenge.  There are two types of challenges:  HTTP01 and DNS01.  The instructions below use DNS01 which is easier if you don't have a web server with a public IP (see acme.yaml for DNS01 challenge details).  At a high level, the DNS01 challenge works as follows:  the "Issuer" in your cluster (that's LetsEncrypt) will use the AWS creds (stored as a secret) to make an API call to AWS Route 53 to create a DNS TXT record.  A public facing ACME server will look for that DNS TXT record to validate you own the domain before issuing a certificate.
+-Step 8 and beyond install Harbor into the cluster.
 
 
 ### INSTRUCTIONS ###
@@ -33,7 +33,7 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 
 7.  Modify the harbor_values.yaml to set global.storageClass.  Also modify the file to set externalURL, ingress.hosts.core, and ingress.hosts.notary to your own domain name.  
 
-12.  Install Harbor using Helm:  
+8.  Install Harbor using Helm:  
 `helm install harbor bitnami/harbor -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values.yaml`
 
-13.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt root cert (and not a self-signed Harbor cert)
+9.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt root cert (and not a self-signed Harbor cert)
