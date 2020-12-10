@@ -10,7 +10,7 @@ The following provides instructions on how to install VMware's open source Harbo
 
 
 ### INSTRUCTIONS ###
-If you're using a TKG cluster with Metallb.  If you're using vSphere with Tanzu skip to step 4)
+If you're using a TKG cluster with Metallb.  If you're using vSphere with Tanzu skip to step 4.
   
 1.   Create a MetalLB namespace:  
 `kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml`  
