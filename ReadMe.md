@@ -23,7 +23,7 @@ If you're using a TKG cluster with Metallb.  If you're using vSphere with Tanzu 
   
 Start here if you're using vSphere with Tanzu and have a newly created workload cluster:
 
-4.   After authenticating for the first time to your workload cluster, create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary is a new cluster):  
+4.   After authenticating for the first time to your workload cluster, create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary in a new cluster):  
 `kubectl apply -f https://raw.githubusercontent.com/trevorputbrese/tkc/master/tkc-priveledged-cluster-role.yaml`    <br />
 
 5.   Add the stable Helm repo (nginx chart is here):  
