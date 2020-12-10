@@ -14,7 +14,7 @@ ingress:
     notary: notary.ashburncloud.net
   enabled: true
 service:
-  type:  Ingress
+  type: Ingress
   tls:
-    existingSecret:  tls-secret
+    existingSecret: tls-secret
     commonName: harbor.ashburncloud.net
