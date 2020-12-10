@@ -44,9 +44,9 @@ Start here if you're using vSphere with Tanzu and have a newly created workload 
 10.  Make sure you have a default storage class in your cluster.  If you don't:  
 `kubectl annotate sc "YOUR-STORAGE-CLASS" storageclass.kubernetes.io/is-default-class=true`
 
-11.  modify harbor-values.yml to set global.storageClass  
+11.  modify harbor_values.yml to set global.storageClass  
 
 12.  Install Harbor using Helm:  
-`helm install harbor bitnami/harbor --version 7.1.0 -f harbor-values.yml`
+`helm install harbor bitnami/harbor --version 7.1.0 -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values.yml`
 
 13.  navigate to harbor.YOUR.DOMAIN in browser
