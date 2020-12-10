@@ -36,4 +36,4 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 8.  Install Harbor using Helm:  
 `helm install harbor bitnami/harbor -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values.yaml`
 
-9.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt root cert (and not a self-signed Harbor cert)
+9.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt (and not a self-signed Harbor cert)
