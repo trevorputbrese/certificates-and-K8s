@@ -25,7 +25,7 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 4.   Install Cert Manager into the cluster:  
 `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.4/cert-manager.yaml`
 
-5.   Apply the acme.yaml file in this repo.  You will first need to edit the file add your own AWS credentials (instructions on how to create IAM role and creds are here:  https://cert-manager.io/docs/configuration/acme/dns01/route53/).  You will also need to modify your the acme.yaml file to use your own domain name.  This yaml will create a secret to store your AWS credentials and also create the Cert Manager "issuer" and "certificate" resources in your cluster:  
+5.   Apply the acme.yaml file in this repo.  You will first need to edit the file add your own AWS credentials (instructions on how to create IAM role and creds are here:  https://cert-manager.io/docs/configuration/acme/dns01/route53/).  You will also need to edit the acme.yaml file with your own domain name.  This yaml will create a secret to store your AWS credentials and also create the Cert Manager "issuer" and "certificate" resources in your cluster:  
 `kubectl apply -f acme.yaml`  
 
 6.  Make sure you have a default storage class in your cluster.  If you don't:  
@@ -37,3 +37,7 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 `helm install harbor bitnami/harbor -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values.yaml`
 
 9.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt (and not a self-signed Harbor cert)
+
+
+### CREDIT ###  
+Thanks to David Pollreisz and Nick Sterling at VMware from whom I cribbed heavily (https://gist.github.com/dpollreisz/55f52eda4d7da7e6b1d8d64c80575432)
