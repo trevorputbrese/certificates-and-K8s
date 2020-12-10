@@ -10,15 +10,20 @@ The following provides instructions on how to install VMware's open source Harbo
 
 
 ### INSTRUCTIONS ###
-w/tkg use Metallb for v7wk8s skip to step 4
+If you're using a TKG cluster with Metallb.  If you're using vSphere with Tanzu skip to step 4)
   
-1.   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml  
-2.   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
-3.   kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"  
-  
-Start w/ TKG-S
+1.   Create a MetalLB namespace:  
+`kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml`  
 
-4.   Create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary is a newly created TKGs K8s cluster):  
+2.   Apply the following yaml to deploy metallb:  
+ `kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml`  
+ 
+3.   Apply the following yaml to create a metallb secret:  
+`kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"`  
+  
+Start here if you're using vSphere with Tanzu and have a newly created workload cluster:
+
+4.   After authenticating for the first time to your workload cluster, create a ClusterRoleBinding and ClusterRole that uses the Privileged PSP (only necessary is a new cluster):  
 `kubectl apply -f https://raw.githubusercontent.com/trevorputbrese/tkc/master/tkc-priveledged-cluster-role.yaml`    <br />
 
 5.   Add the stable Helm repo (nginx chart is here):  
