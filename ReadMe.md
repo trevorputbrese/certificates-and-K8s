@@ -31,10 +31,10 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 6.  Make sure you have a default storage class in your cluster.  If you don't:  
 `kubectl annotate sc "YOUR-STORAGE-CLASS" storageclass.kubernetes.io/is-default-class=true`
 
-7.  Modify the harbor_values.yaml to set global.storageClass.  Also modify the file to set externalURL, ingress.hosts.core, and ingress.hosts.notary to your own domain name.  
+7.  Modify the harbor_values.yaml to set global.storageClass.  Also modify the file to set externalURL, ingress.hosts.core, and ingress.hosts.notary to your own domain name.  Modify the PVC sizes for the containers as needed.  
 
 8.  Install Harbor using Helm:  
-`helm install harbor bitnami/harbor -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values.yaml`
+`helm install harbor bitnami/harbor -f https://raw.githubusercontent.com/trevorputbrese/certificates-and-K8s/main/harbor_values_v2.yaml`
 
 9.  navigate to harbor.YOUR.DOMAIN in browser and click on the "https" (or the lock icon) to view the certificate and confirm its issued by LetsEncrypt (and not a self-signed Harbor cert)
 
