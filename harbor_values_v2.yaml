@@ -1,0 +1,66 @@
+global:
+  storageClass:  "default"
+persistence:
+  persistentVolumeClaim:
+    database:
+      size: 1024Gi
+tls:
+  secretName: tls-secret
+externalURL: https://harbor.trvcloud.com
+harborAdminPassword: admin
+ingress:
+  hosts:
+    core: harbor.trvcloud.com
+    notary: notary.trvcloud.com
+  enabled: true
+service:
+  type: Ingress
+  tls:
+    existingSecret: tls-secret
+persistence:
+  enabled: true
+  ## Resource Policy
+  ## Setting it to "keep" to avoid removing PVCs during a helm delete operation
+  ##
+  resourcePolicy: 'keep'
+  persistentVolumeClaim:
+    registry:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 400Gi
+    jobservice:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 50Gi
+    chartmuseum:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 20Gi
+    trivy:
+      storageClass: ''
+      accessMode: ReadWriteOnce
+      size: 20Gi
