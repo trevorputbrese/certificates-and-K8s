@@ -6,12 +6,12 @@ persistence:
       size: 1024Gi
 tls:
   secretName: tls-secret
-externalURL: https://harbor.trvcloud.com
+externalURL: https://harbor.ashburncloud.net
 harborAdminPassword: admin
 ingress:
   hosts:
-    core: harbor.trvcloud.com
-    notary: notary.trvcloud.com
+    core: harbor.ashburncloud.net
+    notary: notary.ashburncloud.net
   enabled: true
 service:
   type: Ingress
