@@ -1,5 +1,5 @@
 global:
-  storageClass:  "default"
+  storageClass: standard
 persistence:
   persistentVolumeClaim:
     database:
