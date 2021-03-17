@@ -23,7 +23,11 @@ These instructions assume you are using vSphere 7 with Tanzu and have just deplo
 `helm install nginx-ingress stable/nginx-ingress --set controller.config.proxy-body-size=1024m`
 
 4.   Install Cert Manager into the cluster:  
-`kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.4/cert-manager.yaml`
+`kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.4/cert-manager.yaml` 
+latest Cert Manager version:
+`kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml`  
+
+
 
 5.   Apply the acme.yaml file in this repo.  You will first need to edit the file add your own AWS credentials (instructions on how to create IAM role and creds are here:  https://cert-manager.io/docs/configuration/acme/dns01/route53/).  You will also need to edit the acme.yaml file with your own domain name.  This yaml will create a secret to store your AWS credentials and also create the Cert Manager "issuer" and "certificate" resources in your cluster:  
 `kubectl apply -f acme.yaml`  
