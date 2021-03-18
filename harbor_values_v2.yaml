@@ -13,6 +13,17 @@ ingress:
     core: harbor.ashburncloud.net
     notary: notary.ashburncloud.net
   enabled: true
+  controller: default
+  ## Ingress annotations done as key:value pairs
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ##
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: 'true'
+    ingress.kubernetes.io/proxy-body-size: '0'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: '0'
+    kubernetes.io/ingress.class: nginx    
 service:
   type: Ingress
   tls:
@@ -64,3 +75,10 @@ persistence:
       storageClass: ''
       accessMode: ReadWriteOnce
       size: 20Gi
+kind: #@ kind
+metadata:
+  name: #@ name
+#@ end
+
+#@overlay/match by=overlay.subset(resource("Ingress","harbor-harbor-ingress"))
+---
