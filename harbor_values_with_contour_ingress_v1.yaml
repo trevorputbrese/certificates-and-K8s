@@ -1,0 +1,76 @@
+global:
+  storageClass: standard
+persistence:
+  persistentVolumeClaim:
+    database:
+      size: 1024Gi
+tls:
+  secretName: tls-secret
+externalURL: https://harbor.ashburncloud.net
+harborAdminPassword: admin
+ingress:
+  hosts:
+    core: harbor.ashburncloud.net
+    notary: notary.ashburncloud.net
+  enabled: true
+  controller: default
+  ## Ingress annotations done as key:value pairs
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ##
+  annotations:
+    projectcontour.io/response-timeout: "900s"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    #@overlay/match missing_ok=True
+    kubernetes.io/ingress.class: contour
+service:
+  type: Ingress
+  tls:
+    existingSecret: tls-secret
+persistence:
+  enabled: true
+  ## Resource Policy
+  ## Setting it to "keep" to avoid removing PVCs during a helm delete operation
+  ##
+  resourcePolicy: 'keep'
+  persistentVolumeClaim:
+    registry:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 400Gi
+    jobservice:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 50Gi
+    chartmuseum:
+      ## If you want to reuse an existing claim, you can pass the name of the PVC using
+      ## the existingClaim variable
+      ##
+      existingClaim: ''
+      ## Specify the "storageClass" used to provision the volume.
+      ## Set it to "-" to disable dynamic provisioning
+      ##
+      storageClass: ''
+      subPath: ''
+      accessMode: ReadWriteOnce
+      size: 20Gi
+    trivy:
+      storageClass: ''
+      accessMode: ReadWriteOnce
+      size: 20Gi
